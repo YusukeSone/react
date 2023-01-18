@@ -33,9 +33,9 @@ jobs:
       - name: Build
         run: npm run build
         working-directory: react-app-20230119
-      - name: Generate
-        run: npm run generate
-        working-directory: react-app-20230119
+      #- name: Generate
+        # run: npm run generate
+        # working-directory: react-app-20230119
         # - name: Zip artifact for upload
         #  run: cd dist && zip ../dist.zip . -r
       - name: Archive Production Artifact
@@ -71,9 +71,9 @@ jobs:
       - name: Build
         run: npm run build
         working-directory: react-app-20230119
-      - name: Generate
-        run: npm run generate
-        working-directory: react-app-20230119
+     # - name: Generate
+        # run: npm run generate
+        # working-directory: react-app-20230119
         # - name: Zip artifact for upload
         #  run: cd dist && zip ../dist.zip . -r
       - name: Archive Production Artifact
