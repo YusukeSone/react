@@ -37,7 +37,8 @@ jobs:
         #　run: npm run generate
         #　working-directory: react-app-20230119
       - name: Zip artifact for upload
-        run: cd ./react-app-20230119/build && zip ../dist.zip . -r
+        run: zip ../dist.zip . -r
+        working-directory: react-app-20230119/build
       - name: Archive Production Artifact
         uses: actions/upload-artifact@v2
         with:
@@ -75,7 +76,8 @@ jobs:
         # run: npm run generate
         # working-directory: react-app-20230119
       - name: Zip artifact for upload
-        run: cd ./react-app-20230119/builｄ && zip ../dist.zip . -r
+        run: zip ../dist.zip . -r
+        working-directory: react-app-20230119/build
       - name: Archive Production Artifact
         uses: actions/upload-artifact@v2
         with:
