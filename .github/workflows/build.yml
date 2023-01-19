@@ -29,21 +29,21 @@ jobs:
           node-version: '14.x'
       - name: Install dependencies
         run: npm ci
-        working-directory: react-app-20230119
+        working-directory: nextjs/nextjs-app-20230119
       - name: Build
-        run: npm run build
-        working-directory: react-app-20230119
-      #　- name: Generate
-        #　run: npm run generate
-        #　working-directory: react-app-20230119
-      - name: Zip artifact for upload
-        run: zip ../dist.zip . -r
-        working-directory: react-app-20230119/build
+        run: npx next build
+        working-directory: nextjs/nextjs-app-20230119
+      - name: Generate
+        run: npx next export
+        working-directory: nextjs/nextjs-app-20230119
+      #- name: Zip artifact for upload
+       # run: zip ../dist.zip . -r
+       # working-directory: react-app-20230119/build
       - name: Archive Production Artifact
         uses: actions/upload-artifact@v2
         with:
           name: ${{ steps.get_branch.outputs.sha }}-${{ github.run_id }}
-          path: react-app-20230119/build
+          path: nextjs/nextjs-app-20230119/out
           retention-days: 7
       - name: Wait for Artifact download
         run: sleep 15
@@ -68,21 +68,21 @@ jobs:
           node-version: '14.x'
       - name: Install dependencies
         run: npm ci
-        working-directory: react-app-20230119
+        working-directory: nextjs/nextjs-app-20230119
       - name: Build
-        run: npm run build
-        working-directory: react-app-20230119
-     # - name: Generate
-        # run: npm run generate
-        # working-directory: react-app-20230119
-      - name: Zip artifact for upload
-        run: zip ../dist.zip . -r
-        working-directory: react-app-20230119/build
+        run: npx next build
+        working-directory: nextjs/nextjs-app-20230119
+      - name: Generate
+        run: npx next export
+        working-directory: nextjs/nextjs-app-20230119
+      #- name: Zip artifact for upload
+       # run: zip ../dist.zip . -r
+       # working-directory: react-app-20230119/build
       - name: Archive Production Artifact
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.sha }}-${{ github.run_id }}
-          path: react-app-20230119/build
+          path: nextjs/nextjs-app-20230119
           retention-days: 7
       - name: Webhook
         uses: diverta/workflow-webhook@v2
