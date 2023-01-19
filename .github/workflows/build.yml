@@ -36,14 +36,14 @@ jobs:
       - name: Generate
         run: npx next export
         working-directory: nextjs/nextjs-app-20230119
-      #- name: Zip artifact for upload
-       # run: zip ../dist.zip . -r
+      - name: Zip artifact for upload
+        run: cd out && zip ../dist.zip . -r
        # working-directory: react-app-20230119/build
       - name: Archive Production Artifact
         uses: actions/upload-artifact@v2
         with:
           name: ${{ steps.get_branch.outputs.sha }}-${{ github.run_id }}
-          path: nextjs/nextjs-app-20230119/out
+          path: out
           retention-days: 7
       - name: Wait for Artifact download
         run: sleep 15
@@ -75,14 +75,14 @@ jobs:
       - name: Generate
         run: npx next export
         working-directory: nextjs/nextjs-app-20230119
-      #- name: Zip artifact for upload
-       # run: zip ../dist.zip . -r
+      - name: Zip artifact for upload
+        run: cd out && zip ../dist.zip . -r
        # working-directory: react-app-20230119/build
       - name: Archive Production Artifact
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.sha }}-${{ github.run_id }}
-          path: nextjs/nextjs-app-20230119
+          path: out
           retention-days: 7
       - name: Webhook
         uses: diverta/workflow-webhook@v2
