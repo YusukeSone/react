@@ -1,5 +1,9 @@
+import Link from 'next/link'
+import { Inter } from '@next/font/google'
+import styles from '@/styles/Home.module.css'
+
 // posts はビルド時に getStaticProps() によって生成されます。
-function Blog({ posts }) {
+function blog({ posts }) {
 
     console.log({posts})
   return (
@@ -10,6 +14,32 @@ function Blog({ posts }) {
           <div>{post.ymd}</div>
         </li>
       ))}
+      <Link
+        href="/content/test"
+        className={styles.card}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <h2>
+          Test <span>-&gt;</span>
+        </h2>
+        <p>
+          to Test.
+        </p>
+      </Link>
+      <Link
+        href="/"
+        className={styles.card}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <h2>
+          Top <span>-&gt;</span>
+        </h2>
+        <p>
+          to Top.
+        </p>
+      </Link>
     </ul>
   )
 }
@@ -32,4 +62,4 @@ export async function getStaticProps() {
   }
 }
 
-export default Blog
+export default blog
