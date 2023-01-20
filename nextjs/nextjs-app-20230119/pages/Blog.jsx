@@ -5,7 +5,7 @@ function Blog({ posts }) {
   return (
     <ul>
       {posts.list.map((post) => (
-        <li>
+        <li key={post.topics_id}>
           <h1>{post.subject}</h1>
           <div>{post.ymd}</div>
         </li>
