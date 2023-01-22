@@ -2,10 +2,83 @@ import Link from 'next/link'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 
+import useSWR, { SWRConfig } from 'swr'
+const fetcher = url => fetch(url).then((res) => res.json());
+
 // posts はビルド時に getStaticProps() によって生成されます。
-function blog({ posts }) {
+function Blog() {
+
+    
+    const { data, error, isLoading } = useSWR('https://test20230107.g.kuroco.app/rcms-api/1/test', fetcher)
+
+      console.log(data)
+
+    if (error) return <ul>failed to load</ul>
+    if (isLoading) return <ul>loading...</ul>
+    
+    // データをレンダリングする
+  return (
+    <ul>
+
+      {data.list.map((post) => (
+        <li key={post.topics_id}>
+          <h1>{post.subject}</h1>
+          <div>{post.ymd}</div>
+        </li>
+      ))}
+      <Link
+        href="/content/test"
+        className={styles.card}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <h2>
+          Test <span>-&gt;</span>
+        </h2>
+        <p>
+          to Test.
+        </p>
+      </Link>
+      <Link
+        href="/"
+        className={styles.card}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <h2>
+          Top <span>-&gt;</span>
+        </h2>
+        <p>
+          to Top.
+        </p>
+      </Link>
+    </ul>
+  )
+}
+
+function App () {
+  return (
+    <SWRConfig
+      value={{
+        refreshInterval: 3000
+      }}
+    >
+      <Blog />
+    </SWRConfig>
+  )
+}
+
+{/*
+// posts はビルド時に getStaticProps() によって生成されます。
+function Blog({ posts }) {
 
     console.log({posts})
+    const { data, error, isLoading } = useSWR('', fetcher)
+
+    if (error) return <div>failed to load</div>
+    if (isLoading) return <div>loading...</div>
+    
+    // データをレンダリングする
   return (
     <ul>
       {posts.list.map((post) => (
@@ -62,4 +135,7 @@ export async function getStaticProps() {
   }
 }
 
-export default blog
+*/}
+
+
+export default App
