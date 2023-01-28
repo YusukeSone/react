@@ -5,13 +5,12 @@ import styles from '@/styles/Home.module.css'
 import useSWR, { SWRConfig } from 'swr'
 const fetcher = url => fetch(url).then((res) => res.json());
 
+
 // posts はビルド時に getStaticProps() によって生成されます。
 function Blog() {
 
-    
     const { data, error, isLoading } = useSWR('https://test20230107.g.kuroco.app/rcms-api/1/test', fetcher)
 
-      console.log(data)
 
     if (error) return <ul>failed to load</ul>
     if (isLoading) return <ul>loading...</ul>
@@ -19,13 +18,14 @@ function Blog() {
     // データをレンダリングする
   return (
     <ul>
-
       {data.list.map((post) => (
         <li key={post.topics_id}>
           <h1>{post.subject}</h1>
           <div>{post.ymd}</div>
+          <div dangerouslySetInnerHTML={{ __html: post.contents + "<p>" + post.update_ymdhi + "</p>" }}></div>
         </li>
       ))}
+      <Data2 />
       <Link
         href="/content/test"
         className={styles.card}
@@ -56,11 +56,29 @@ function Blog() {
   )
 }
 
+function Data2 () {
+    const { data, error, isLoading } = useSWR('https://test20230107.g.kuroco.app/rcms-api/1/test02', fetcher)
+
+    if (error) return <ul>failed to load</ul>
+    if (isLoading) return <ul>loading...</ul>
+
+    return (
+      <div>
+        {data.list.map((post) => (
+          <li key={post.login_id}>
+            <p>{post.name1}</p>
+            <p>{post.name2}</p>
+          </li>
+        ))}
+      </div>
+    )
+}
+
 function App () {
   return (
     <SWRConfig
       value={{
-        refreshInterval: 3000
+        refreshInterval: 15000
       }}
     >
       <Blog />
